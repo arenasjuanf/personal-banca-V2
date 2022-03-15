@@ -26,12 +26,4 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300;1,700;1,900&family=Quicksand:wght@300;500;700&display=swap');
-:root{
-
-    --blue-light: #4EE1F5;
-    --blue: #364CF7;
-    --violet: #9B0FDB;
-    --red: #F5001B;
-    --orange: #E85E05; 
-
-}
+@import "styles.scss";
