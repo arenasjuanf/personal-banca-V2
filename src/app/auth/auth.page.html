@@ -1,0 +1,67 @@
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      
+      <ion-col  size-md="6" size-xs="12">
+        <ion-img src="./assets/icon/logo.svg" class="ion-padding"></ion-img>
+      </ion-col>
+
+
+      <ion-col size-md="6" size-xs="12" class="ion-padding form-cont" [formGroup]="form">
+
+        <ion-text class="ion-text-center">
+          <h1>Iniciar sesión</h1>
+        </ion-text>
+
+        <ion-item  class="input">
+          <ion-input placeholder="Correo Electrónico" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-text  *ngIf="forms.getErrors(form, 'email')?.required">
+          <ion-note color="danger">{{ forms.getErrors(form, 'email').required.message }}</ion-note>
+        </ion-text>  
+        <ion-text  *ngIf="forms.getErrors(form, 'email')?.email">
+          <ion-note color="danger">{{ forms.getErrors(form, 'email').email.message }}</ion-note>
+        </ion-text>  
+
+        <ion-item  class="input">
+          <ion-input placeholder="Contraseña" formControlName="password" type="password"></ion-input>     
+        </ion-item>
+        <ion-text *ngIf="forms.getErrors(form, 'password')?.required">
+          <ion-note  color="danger">{{ forms.getErrors(form, 'password').required.message }}</ion-note>
+        </ion-text>     
+
+        <ion-item  class="mantener-sesion" lines="none">
+          <ion-checkbox formControlName="mantenerSesion"></ion-checkbox>
+          <ion-label>Mantener sesión</ion-label>
+        </ion-item>
+
+        <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" (click)="login()">
+          <ion-icon name="enter-outline" slot="start"></ion-icon>
+          Ingresar
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+
+        <ion-text class="ion-text-center recuperar-clave">
+          <small>
+            Olvidaste tu contraseña?
+            <ion-text color="primary">
+              <b>Recuperala</b>
+            </ion-text>
+          </small>
+        </ion-text>
+        
+
+        <ion-text class="ion-text-center">
+          <p>
+            No tienes una cuenta? 
+            <ion-text color="primary">
+              <b class="pointer" (click)="goTo('auth/register')">Registrate</b>
+            </ion-text>
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+

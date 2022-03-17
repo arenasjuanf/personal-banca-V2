@@ -1,0 +1,55 @@
+
+
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      
+      <ion-col  size-md="6" size-xs="12">
+        <ion-img src="./assets/icon/logo.svg" class="ion-padding"></ion-img>
+      </ion-col>
+
+
+      <ion-col size-md="6" size-xs="12" class="ion-padding form-cont" [formGroup]="form">
+
+        <ion-text class="ion-text-center">
+          <ion-icon size="large" name="chevron-back-outline" class="pointer" routerLink="auth"></ion-icon>
+          <h1>Regístrate</h1>
+          <ion-icon name="" ></ion-icon>
+        </ion-text>
+
+        <ion-item  class="input">
+          <ion-input placeholder="Nombres" formControlName="nombres"></ion-input>
+        </ion-item>
+        <ion-item  class="input">
+          <ion-input placeholder="Apellidos" formControlName="apellidos"></ion-input>
+        </ion-item>
+        <ion-item  class="input">
+          <ion-input placeholder="Correo Electrónico" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item  class="input">
+          <ion-input placeholder="Contraseña" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item  class="input">
+          <ion-input placeholder="Confirmar Contraseña" formControlName="repassword"></ion-input>
+        </ion-item>
+
+        <ion-item  class="mantener-sesion" lines="none">
+          <ion-checkbox formControlName="aceptarTerminos"></ion-checkbox>
+          <ion-label> Acepto términos y condiciones </ion-label>
+        </ion-item>
+
+      
+        <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" (click)="register()">
+          <ion-icon name="enter-outline" slot="start"></ion-icon>
+          Registrarse
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+
+
+              
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,21 @@
+:host{
+    // height: 9%;
+    background-color: #195d9f;
+    border-radius: 0 0 20px 20px;
+
+    ion-toolbar{
+        height: 65px;
+        border-radius: 0 0 20px 20px;
+        --background: #195d9f;
+        padding-top: 10px;
+        color: #ffff;
+        border-bottom: 5px solid #6fa1f5;
+        ion-icon{
+            color: #ffff;
+        }
+        
+    }
+
+
+}
+

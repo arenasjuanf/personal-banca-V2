@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +24,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     RxReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot({
+      name: environment.localDbName,
+      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
+    })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

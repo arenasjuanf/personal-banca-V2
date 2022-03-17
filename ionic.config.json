@@ -1,5 +1,7 @@
 {
   "name": "personalbanca",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,14 @@
+
+<ion-toolbar class="ion-text-center" mode="ios" lines="none">
+  <ion-buttons slot="start">
+    <ion-button (click)="datos?.startFunction ? datos?.startFunction() : menu.toggle()">
+      <ion-icon [name]="datos?.startIcon || 'menu-outline'"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end" *ngIf="datos?.endFunction">
+    <ion-button (click)="datos?.endFunction()">
+      <ion-icon [name]="datos?.endIcon"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>{{title}}</ion-title>
+</ion-toolbar>
