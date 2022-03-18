@@ -9,7 +9,7 @@ export class AhorroModel {
 
     @required({message: 'campo requerido'})
     nombre: string;
-
+    
     @required({message: 'campo requerido'})
     @numeric({message: 'debe ingresar un número'})
     objetivo:  number;
