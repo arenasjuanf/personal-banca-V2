@@ -10,6 +10,14 @@
 
 }
 
+.pop-date{
+    &::part(content){
+        width: 300px;
+        background-color: red;
+      }
+      
+}
+
 
 .pointer{
     cursor: pointer;

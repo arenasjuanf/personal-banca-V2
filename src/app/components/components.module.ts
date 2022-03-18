@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { CalendarComponent } from './calendar/calendar.component';
 import { HeaderComponent } from './header/header.component';
 
 const components = [
-    HeaderComponent
+    HeaderComponent,
+    CalendarComponent
 ];
 
 @NgModule({

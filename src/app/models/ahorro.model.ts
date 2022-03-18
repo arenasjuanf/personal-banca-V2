@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { date, numeric, prop, required } from '@rxweb/reactive-form-validators';
+import {  numeric, prop, required } from '@rxweb/reactive-form-validators';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
-export class AhorroModel{
+export class AhorroModel {
 
     @required({message: 'campo requerido'})
-    @numeric({message: 'debe ingresar un número'})
-    tipo: 1 | 2;
+    tipo: number = 1; // 1 ahorro | 2 deuda
 
     @required({message: 'campo requerido'})
     nombre: string;
@@ -15,21 +14,22 @@ export class AhorroModel{
     @numeric({message: 'debe ingresar un número'})
     objetivo:  number;
 
-    @required({message: 'campo requerido'})
     @numeric({message: 'debe ingresar un número'})
-    ahorrado:  number;
+    ahorrado?:  number;
 
-    @required({message: 'campo requerido', conditionalExpression: (model: AhorroModel) => model.tipo_ahorro === 1})
+    @required({message: 'campo requerido', conditionalExpression: (model: AhorroModel) => model.tipo_ahorro === 2})
     @numeric({message: 'debe ingresar un número'})
     intervalo:  number;
 
     @required({message: 'campo requerido'})
     @numeric({message: 'debe ingresar un número'})
-    tipo_ahorro:  number;
+    tipo_ahorro: 1 | 2 | 3;
 
-    @required({message: 'campo requerido'})
-    @date({message: 'debe ingresar una fecha'})
-    fechaMeta:  Date;
+    @prop()
+    requiereFecha: boolean;
+
+    @required({message: 'campo requerido',  conditionalExpression: (model: AhorroModel) => !model.requiereFecha})
+    fechaMeta: string;
 
     @prop()
     id?:  number;
