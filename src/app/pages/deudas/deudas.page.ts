@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AhorrosService } from 'src/app/services/ahorros.service';
+import { Globals } from 'src/app/shared/globals';
 
 @Component({
   selector: 'app-deudas',
@@ -9,7 +10,7 @@ import { AhorrosService } from 'src/app/services/ahorros.service';
 export class DeudasPage implements OnInit {
 
   list: any[];
-
+  public getTipoAhorro = Globals.getTipoAhorro;
 
   constructor(
     private deudas: AhorrosService

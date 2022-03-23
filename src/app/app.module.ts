@@ -19,7 +19,9 @@ import { environment } from 'src/environments/environment';
   // eslint-disable-next-line max-len
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      swipeBackEnabled: false
+    }),
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

@@ -17,4 +17,8 @@ export abstract class Globals{
         }
 
     ];
+
+    static getTipoAhorro = (id: number) => (
+        this.tiposAhorro.find( (tipo: TipoAhorroModel) => tipo.id === id)?.nombre || '---'
+    );
 }

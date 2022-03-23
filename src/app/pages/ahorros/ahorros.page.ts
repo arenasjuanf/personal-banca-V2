@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
 import { AhorrosService } from 'src/app/services/ahorros.service';
+import { Globals } from 'src/app/shared/globals';
 import { FormComponent } from './form/form.component';
 
 @Component({
@@ -11,6 +12,7 @@ import { FormComponent } from './form/form.component';
 export class AhorrosPage implements OnInit {
   public list: any[];
   public headerOptions: { endIcon: string; endFunction: () => void};
+  public getTipoAhorro = Globals.getTipoAhorro;
 
   constructor(
     private ahorros: AhorrosService,
