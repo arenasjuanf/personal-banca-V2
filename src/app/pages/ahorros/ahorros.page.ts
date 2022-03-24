@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
+import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { Globals } from 'src/app/shared/globals';
 import { FormComponent } from './form/form.component';
+import { VistaComponent } from './vista/vista.component';
 
 @Component({
   selector: 'app-ahorros',
@@ -36,11 +38,11 @@ export class AhorrosPage implements OnInit {
   initHeaderOptions(){
     this.headerOptions = {
       endIcon: 'add',
-      endFunction : () => this.openModal()
+      endFunction : () => this.openModalForm()
     };
   }
 
-  async openModal(){
+  async openModalForm(){
    const modal = await this.modalCtrol.create(
       {
         animated: true,
@@ -51,6 +53,20 @@ export class AhorrosPage implements OnInit {
         presentingElement: this.routerOutlet.nativeEl
       }
     );
+    return await modal.present();
+  }
+
+  async openModalView(ahorro: AhorroModel){
+
+    const modal = await this.modalCtrol.create(
+      {
+        animated: true,
+        mode: 'md',
+        component: VistaComponent,
+        swipeToClose: false,
+        presentingElement: this.routerOutlet.nativeEl,
+        componentProps: {ahorro}
+      });
     return await modal.present();
   }
 

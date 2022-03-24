@@ -10,6 +10,7 @@ import { AhorrosPage } from './ahorros.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { FormComponent } from './form/form.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { VistaComponent } from './vista/vista.component';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [AhorrosPage, FormComponent]
+  declarations: [AhorrosPage, FormComponent, VistaComponent]
 })
 export class AhorrosPageModule {}

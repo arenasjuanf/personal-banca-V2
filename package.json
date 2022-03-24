@@ -30,6 +30,7 @@
     "@rxweb/reactive-form-validators": "^2.1.6",
     "cordova-plugin-nativestorage": "^2.3.2",
     "date-fns": "^2.28.0",
+    "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.4"
   },

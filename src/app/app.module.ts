@@ -12,9 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from './shared/pipes/date.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DatePipe],
   entryComponents: [],
   // eslint-disable-next-line max-len
   imports: [

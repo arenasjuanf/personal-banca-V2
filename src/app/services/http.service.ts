@@ -17,7 +17,7 @@ export class HttpService {
     return this.http.post<HttpResponseModel>(`${environment.urlServer}/${url}`, data);
   }
 
-  get(url: string): Observable<HttpResponseModel>{
+  get(url: string): Observable<any>{
     return this.http.get<HttpResponseModel>(`${environment.urlServer}/${url}`);
   }
 }

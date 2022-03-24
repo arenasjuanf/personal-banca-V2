@@ -7,15 +7,15 @@
     --orange: #E85E05;
     
     --ion-font-family: 'Poppins', sans-serif;
-
 }
+
+
 
 .pop-date{
     &::part(content){
         width: 300px;
         background-color: red;
-      }
-      
+    }
 }
 
 
@@ -25,4 +25,13 @@
 
 .modal-desktop{
     border-radius: 20px;;
+}
+
+.content{
+    &::part(background){
+        border: 2px solid #b9cae833;
+        margin: 4px;
+        border-radius: 20px;
+        background-color: #e3edff33;
+    }
 }
