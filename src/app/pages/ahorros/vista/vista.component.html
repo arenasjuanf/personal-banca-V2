@@ -4,7 +4,7 @@
     <ion-card-content>
       <ion-grid fixed>
         <ion-row>
-          <ion-col size="9">
+          <ion-col [size]="datosAhorro?.tipo_ahorro === 1 ? 9 : 12">
             <ion-row>
               <ion-col size="12" class="objetivo">
                 <ion-text >
@@ -22,8 +22,8 @@
               </ion-col>
             </ion-row>
           </ion-col>
-          <ion-col size="3" class="ion-text-end btn-add-container " >
-            <ion-button fill="solid" color="primary" size="small">
+          <ion-col  *ngIf="datosAhorro?.tipo_ahorro === 1" size="3" class="ion-text-end btn-add-container " >
+            <ion-button fill="solid" color="primary" size="small" (click)="showAddMonto()">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-col>
@@ -47,17 +47,15 @@
       </ion-item-sliding>
     </ion-list>
 
-
     <ion-list lines="full" *ngIf="datosAhorro?.tipo_ahorro === 2" >
       <ion-grid fixed>
         <ion-row>
-          <ion-col size="4" size-md="3" class="cell" *ngFor="let monto of datosAhorro?.montos || []" [ngClass]="{'checked': monto.chec}" >
+          <ion-col size="4" size-md="3" class="cell" *ngFor="let monto of (datosAhorro?.montos || []); trackBy: montoTrackBy" [ngClass]="{'checked': monto.chec}"  (click)="selectIntervalo(monto)">
             {{ monto.valor | currency:"$":"symbol" }}
             <ion-icon name="checkmark-outline" color="primary" *ngIf="monto.chec"></ion-icon>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-list>
-
   </ion-card>
 </ion-content>

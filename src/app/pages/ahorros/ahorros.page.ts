@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonRouterOutlet, ModalController, Platform } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { Globals } from 'src/app/shared/globals';
@@ -20,7 +20,7 @@ export class AhorrosPage implements OnInit {
     private ahorros: AhorrosService,
     private modalCtrol: ModalController,
     private routerOutlet: IonRouterOutlet,
-    public platform: Platform
+    private alert: AlertController,
   ) {
     this.initHeaderOptions();
     this.getAhorros();
@@ -49,7 +49,6 @@ export class AhorrosPage implements OnInit {
         mode: 'md',
         component: FormComponent,
         swipeToClose: false,
-        // cssClass: this.platform.platforms().includes('desktop') ? 'modal-desktop' : '',
         presentingElement: this.routerOutlet.nativeEl
       }
     );
@@ -58,7 +57,7 @@ export class AhorrosPage implements OnInit {
 
   async openModalView(ahorro: AhorroModel){
 
-    const modal = await this.modalCtrol.create(
+    const modal: HTMLIonModalElement = await this.modalCtrol.create(
       {
         animated: true,
         mode: 'md',
@@ -67,7 +66,36 @@ export class AhorrosPage implements OnInit {
         presentingElement: this.routerOutlet.nativeEl,
         componentProps: {ahorro}
       });
-    return await modal.present();
+
+      await modal.present();
+      const update = (await modal.onDidDismiss()) || '';
+      console.log(update);
+  }
+
+  async alertDelete(ahorro: AhorroModel): Promise<void>{
+    const alert = await this.alert.create({
+      header: 'Eliminar',
+      message: 'Está seguro de eliminar el ahorro?',
+      buttons: [{
+        text: 'Si',
+        handler: (result) => {
+          this.delete(ahorro);
+        }
+      },
+      {
+        role: 'cancel', text: 'No'
+      }]
+    });
+
+    return await alert.present();
+  }
+
+  delete(ahorro: AhorroModel): void{
+    this.ahorros.delete(ahorro.id, ahorro.tipo).subscribe(({success}) => {
+      if(success){
+        this.getAhorros();
+      }
+    });
   }
 
 }

@@ -20,4 +20,12 @@ export class HttpService {
   get(url: string): Observable<any>{
     return this.http.get<HttpResponseModel>(`${environment.urlServer}/${url}`);
   }
+
+  put(url: string, data: any): Observable<any>{
+    return this.http.put<HttpResponseModel>(`${environment.urlServer}/${url}`, data);
+  }
+
+  delete(url: string, data: any): Observable<any>{
+    return this.http.delete<HttpResponseModel>(`${environment.urlServer}/${url}`, { params : data});
+  }
 }

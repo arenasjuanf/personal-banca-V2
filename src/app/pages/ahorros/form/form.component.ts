@@ -41,7 +41,6 @@ export class FormComponent implements OnInit {
   }
 
   async openDatePicker(){
-
     const popover = await this.popoverCtrl.create({
       component: CalendarComponent,
       mode: 'ios',
@@ -56,8 +55,11 @@ export class FormComponent implements OnInit {
   }
 
   async save(){
-    console.log(this.form);
-    (await this.ahorrosService.save(this.form.value)).subscribe(console.log);
+    (await this.ahorrosService.save(this.form.value)).subscribe(({success}) => {
+      if(success){
+        this.modalCtrl.dismiss({update: true});
+      }
+    });
   }
 
 }

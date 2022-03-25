@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { TimeService } from 'src/app/services/time.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,14 +12,15 @@ import { es } from 'date-fns/locale';
 export class CalendarComponent implements OnInit {
   public today: string = new Date().toISOString();
   constructor(
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private time: TimeService
   ) { }
 
   ngOnInit() {}
 
   selectDate(evento){
     this.popoverCtrl.dismiss({
-      date: format(parseISO(evento.detail.value), 'MMM d, yyyy', {locale: es})
+      date: this.time.parse(evento.detail.value)
     });
   }
 
