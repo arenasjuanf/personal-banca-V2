@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
-import { Subject } from 'rxjs';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
-import { AhorroModel } from 'src/app/models/ahorro.model';
+import { DeudaModel } from 'src/app/models/deuda.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
+import { DeudasService } from 'src/app/services/deudas.service';
 import { FormsService } from 'src/app/services/forms.service';
-import { HttpService } from 'src/app/services/http.service';
 import { Globals } from 'src/app/shared/globals';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  styleUrls: ['../../ahorros/form/form.component.scss'],
 })
 export class FormComponent implements OnInit {
 
@@ -23,9 +22,9 @@ export class FormComponent implements OnInit {
     public modalCtrl: ModalController,
     private popoverCtrl: PopoverController,
     private formService: FormsService,
-    private ahorrosService: AhorrosService
+    private deudasService: DeudasService
   ) {
-    this.form = this.formService.initForm(new AhorroModel());
+    this.form = this.formService.initForm(new DeudaModel());
     this.initHeaderOptions();
   }
 
@@ -55,7 +54,7 @@ export class FormComponent implements OnInit {
   }
 
   async save(): Promise<void>{
-    (await this.ahorrosService.save(this.form.value)).subscribe(({success}) => {
+    (await this.deudasService.save(this.form.value)).subscribe(({success}) => {
       if(success){
         this.modalCtrl.dismiss({update: true});
       }

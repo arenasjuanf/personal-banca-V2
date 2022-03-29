@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -8,6 +8,8 @@ import { DeudasPageRoutingModule } from './deudas-routing.module';
 
 import { DeudasPage } from './deudas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { FormComponent } from './form/form.component';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   imports: [
@@ -15,8 +17,10 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     DeudasPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    RxReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [DeudasPage]
+  declarations: [DeudasPage,FormComponent]
 })
 export class DeudasPageModule {}

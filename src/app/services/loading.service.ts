@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class LoadingService {
   ) {
   }
 
-  async show(message: string = "Por favor espere "){
+  async show(message: string = 'Por favor espere '){
     this.currentLoading = await this.loadingController.create({
       message,
       cssClass: 'my-custom-class',
@@ -22,7 +23,9 @@ export class LoadingService {
   }
 
   hide(){
-    this.currentLoading?.dismiss();
+    timer(1000).subscribe(() => {
+      this.currentLoading?.dismiss();
+    });
   }
 
 }

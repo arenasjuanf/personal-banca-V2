@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { Globals } from 'src/app/shared/globals';
 import { FormComponent } from './form/form.component';
 import { VistaComponent } from './vista/vista.component';
@@ -21,8 +22,10 @@ export class AhorrosPage implements OnInit {
     private modalCtrol: ModalController,
     private routerOutlet: IonRouterOutlet,
     private alert: AlertController,
+    private loading: LoadingService
   ) {
     this.initHeaderOptions();
+    this.loading.show('Cargando ahorros');
     this.getAhorros();
   }
 
@@ -32,6 +35,7 @@ export class AhorrosPage implements OnInit {
   async getAhorros(){
     (await this.ahorros.getAll(1)).subscribe((list: any) => {
       this.list = list;
+      this.loading.hide();
     });
   }
 
@@ -43,7 +47,7 @@ export class AhorrosPage implements OnInit {
   }
 
   async openModalForm(){
-   const modal = await this.modalCtrol.create(
+    const modal = await this.modalCtrol.create(
       {
         animated: true,
         mode: 'md',
@@ -56,7 +60,6 @@ export class AhorrosPage implements OnInit {
   }
 
   async openModalView(ahorro: AhorroModel){
-
     const modal: HTMLIonModalElement = await this.modalCtrol.create(
       {
         animated: true,
@@ -68,8 +71,11 @@ export class AhorrosPage implements OnInit {
       });
 
       await modal.present();
-      const update = (await modal.onDidDismiss()) || '';
-      console.log(update);
+      const {data} = (await modal.onDidDismiss());
+      if(data.update){
+        this.loading.show('Cargando ahorros');
+        this.getAhorros();
+      }
   }
 
   async alertDelete(ahorro: AhorroModel): Promise<void>{
@@ -91,6 +97,7 @@ export class AhorrosPage implements OnInit {
   }
 
   delete(ahorro: AhorroModel): void{
+    this.loading.show('Eliminando Ahorro');
     this.ahorros.delete(ahorro.id, ahorro.tipo).subscribe(({success}) => {
       if(success){
         this.getAhorros();
