@@ -8,8 +8,9 @@ import { DeudasPageRoutingModule } from './deudas-routing.module';
 
 import { DeudasPage } from './deudas.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { FormComponent } from './form/form.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { VistaComponent } from './vista/vista.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     RxReactiveFormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DeudasPage,FormComponent]
+  declarations: [DeudasPage,FormComponent, VistaComponent]
 })
 export class DeudasPageModule {}

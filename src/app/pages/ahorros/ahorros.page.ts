@@ -47,7 +47,7 @@ export class AhorrosPage implements OnInit {
   }
 
   async openModalForm(){
-    const modal = await this.modalCtrol.create(
+    const modal: HTMLIonModalElement = await this.modalCtrol.create(
       {
         animated: true,
         mode: 'md',
@@ -56,7 +56,12 @@ export class AhorrosPage implements OnInit {
         presentingElement: this.routerOutlet.nativeEl
       }
     );
-    return await modal.present();
+    await modal.present();
+    const {update} = (await modal.onDidDismiss()).data || {};
+    if(update){
+      this.loading.show('Cargando ahorros');
+      this.getAhorros();
+    }
   }
 
   async openModalView(ahorro: AhorroModel){

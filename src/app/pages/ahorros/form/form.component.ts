@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
-import { Subject } from 'rxjs';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { FormsService } from 'src/app/services/forms.service';
-import { HttpService } from 'src/app/services/http.service';
 import { Globals } from 'src/app/shared/globals';
 
 @Component({
