@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { DeudasService } from 'src/app/services/deudas.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-vista',
@@ -18,7 +19,8 @@ export class VistaComponent implements OnInit {
     public modalCtrl: ModalController,
     private deudasService: DeudasService,
     public alertController: AlertController,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private toast: ToastService
   ) {
     this.initHeaderOptions();
   }
@@ -58,8 +60,16 @@ export class VistaComponent implements OnInit {
       buttons: [{
         text: 'Aceptar',
         handler: ({valor}) => {
-          if(valor){
+          const {objetivo, ahorrado} = this.datosAhorro;
+          if(valor  <= (objetivo-ahorrado)){
             this.addMonto(valor);
+          }else{
+            this.toast.show({
+              message:'El monto ingresado sobrepasa el total de la deuda',
+              icon: 'close',
+              duration: 1500,
+              position: 'bottom'
+            });
           }
         }
       },

@@ -11,6 +11,7 @@ import { TimeService } from 'src/app/services/time.service';
 })
 export class CalendarComponent implements OnInit {
   public today: string = new Date().toISOString();
+  public max: string = new Date( new Date().setFullYear(new Date().getFullYear() + 100)).toISOString();
   constructor(
     private popoverCtrl: PopoverController,
     private time: TimeService

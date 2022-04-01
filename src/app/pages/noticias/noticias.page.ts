@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from 'src/app/services/loading.service';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
   selector: 'app-noticias',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoticiasPage implements OnInit {
 
-  constructor() { }
+  news = [];
+
+  constructor(
+    private newsService: NewsService,
+    private loading: LoadingService
+  ) { 
+    this.newsService.categoryPage = 0;
+    this.traerNoticias();
+  }
 
   ngOnInit() {
+  }
+
+  traerNoticias(){
+    this.loading.show('Cargando Noticias');
+    this.newsService.getTopHeadLinesCategory().subscribe((result: any) => {
+      this.news = [...this.news, ...result.articles];
+      this.loading.hide();
+    });
   }
 
 }

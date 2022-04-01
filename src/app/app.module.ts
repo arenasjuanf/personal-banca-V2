@@ -14,6 +14,7 @@ import { Drivers } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from './shared/pipes/date.pipe';
 
+
 @NgModule({
   declarations: [AppComponent, DatePipe],
   entryComponents: [],

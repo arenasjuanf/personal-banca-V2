@@ -77,7 +77,7 @@ export class AhorrosPage implements OnInit {
 
       await modal.present();
       const {data} = (await modal.onDidDismiss());
-      if(data.update){
+      if(data?.update){
         this.loading.show('Cargando ahorros');
         this.getAhorros();
       }

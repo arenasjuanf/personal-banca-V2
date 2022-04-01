@@ -29,6 +29,11 @@ const routes: Routes = [
     path: 'noticias',
     loadChildren: () => import('./noticias/noticias.module').then( m => m.NoticiasPageModule)
   },
+  {
+    path: 'contactos',
+    loadChildren: () => import('./contactos/contactos.module').then( m => m.ContactosPageModule)
+  },
+
 ];
 
 @NgModule({

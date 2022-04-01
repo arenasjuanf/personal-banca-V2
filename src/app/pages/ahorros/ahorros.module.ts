@@ -21,7 +21,7 @@ import { VistaComponent } from './vista/vista.component';
     ComponentsModule,
     RxReactiveFormsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [AhorrosPage, FormComponent, VistaComponent]
 })

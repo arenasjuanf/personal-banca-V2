@@ -16,20 +16,21 @@ export class LoadingService {
   ) {
   }
 
-  async show(message: string = 'Por favor espere '){
+  async show(message: string = 'Por favor espere '): Promise<void> {
     this.currentLoading = await this.loadingController.create({
       message,
       cssClass: 'my-custom-class',
     });
-    await this.currentLoading.present();
-    this.flagLoading.next(true);
-
+    this.currentLoading.present().then(() => {
+      this.flagLoading.next(true);
+    });
   }
 
-  async hide(){
-    this.flagLoading.pipe(take(1)).subscribe((value) => {
-      this.currentLoading?.dismiss();
+  async hide(): Promise<void>{
+    this.flagLoading.pipe(take(1)).toPromise().then(() => {
+      console.log(this.currentLoading);
       this.flagLoading.next(false);
+      this.currentLoading.dismiss();
     });
   }
 

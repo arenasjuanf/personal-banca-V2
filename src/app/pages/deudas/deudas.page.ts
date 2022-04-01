@@ -80,20 +80,20 @@ export class DeudasPage implements OnInit {
 
       await modal.present();
       const {data} = (await modal.onDidDismiss());
-      if(data.update){
+      if(data?.update){
         this.loading.show('Cargando ahorros');
         this.getDeudas();
       }
   }
 
-  async alertDelete(ahorro: DeudaModel): Promise<void>{
+  async alertDelete(deuda: DeudaModel): Promise<void>{
     const alert = await this.alert.create({
       header: 'Eliminar',
-      message: 'Está seguro de eliminar el ahorro?',
+      message: 'Está seguro de eliminar la deuda?',
       buttons: [{
         text: 'Si',
         handler: (result) => {
-          //this.delete(ahorro);
+          this.delete(deuda);
         }
       },
       {
@@ -102,6 +102,15 @@ export class DeudasPage implements OnInit {
     });
 
     return await alert.present();
+  }
+
+  delete(ahorro: DeudaModel): void{
+    this.loading.show('Eliminando Deuda');
+    this.deudas.delete(ahorro.id, ahorro.tipo).subscribe(({success}) => {
+      if(success){
+        this.getDeudas();
+      }
+    });
   }
 
 }

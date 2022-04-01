@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-vista',
@@ -18,7 +19,8 @@ export class VistaComponent implements OnInit {
     public modalCtrl: ModalController,
     private ahorroService: AhorrosService,
     public alertController: AlertController,
-    private loading: LoadingService
+    private loading: LoadingService,
+    private toast: ToastService
   ) {
     this.initHeaderOptions();
   }
@@ -78,7 +80,17 @@ export class VistaComponent implements OnInit {
         text: 'Aceptar',
         handler: ({valor}) => {
           if(valor){
-            this.addMonto(valor);
+            const { objetivo, ahorrado } = this.datosAhorro;
+            if(valor  <= (objetivo-ahorrado)){
+              this.addMonto(valor);
+            }else{
+              this.toast.show({
+                message:'El monto ingresado sobrepasa el total del ahorro',
+                icon: 'close',
+                duration: 1500,
+                position: 'bottom'
+              });
+            }
           }
         }
       },
