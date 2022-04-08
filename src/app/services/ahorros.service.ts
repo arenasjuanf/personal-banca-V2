@@ -27,9 +27,9 @@ export class AhorrosService {
     })));
   }
 
-  async save(data: AhorroModel){
+  async save(data: AhorroModel, update?: boolean){
     const { id: userId } = await this.storage.get('user');
-    return this.http.post('agregarAhorro', {
+    return this.http.post(!update ? 'agregarAhorro' : 'actualizarAhorro', {
       ...data,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       fk_id_usuario: userId,

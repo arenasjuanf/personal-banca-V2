@@ -17,6 +17,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     NoticiasPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [NoticiasPage]
+  declarations: [NoticiasPage],
+  providers: [ ]
 })
 export class NoticiasPageModule {}

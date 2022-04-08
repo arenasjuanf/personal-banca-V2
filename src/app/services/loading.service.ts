@@ -21,6 +21,7 @@ export class LoadingService {
       message,
       cssClass: 'my-custom-class',
     });
+    console.log(this.currentLoading);
     this.currentLoading.present().then(() => {
       this.flagLoading.next(true);
     });
@@ -28,9 +29,10 @@ export class LoadingService {
 
   async hide(): Promise<void>{
     this.flagLoading.pipe(take(1)).toPromise().then(() => {
-      console.log(this.currentLoading);
-      this.flagLoading.next(false);
-      this.currentLoading.dismiss();
+      timer(1000).subscribe(() => {
+        this.currentLoading.dismiss();
+        this.flagLoading.next(false);
+      });
     });
   }
 

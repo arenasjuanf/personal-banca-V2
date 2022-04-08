@@ -20,8 +20,10 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {}
 
   selectDate(evento){
+
+    console.log( this.time.parse(evento.detail.value) );
     this.popoverCtrl.dismiss({
-      date: this.time.parse(evento.detail.value)
+      date: this.time.parse(evento.detail.value, 'YYYY-M-D')
     });
   }
 

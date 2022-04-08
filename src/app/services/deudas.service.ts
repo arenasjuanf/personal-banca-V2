@@ -28,9 +28,9 @@ export class DeudasService {
     })));
   }
 
-  async save(data: DeudaModel){
+  async save(data: DeudaModel, update?: boolean){
     const { id: userId } = await this.storage.get('user');
-    return this.http.post('agregarDeuda', {
+    return this.http.post(!update ? 'agregarDeuda' : 'actualizarAhorro', {
       ...data,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       fk_id_usuario: userId,

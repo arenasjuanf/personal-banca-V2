@@ -47,7 +47,7 @@ export class DeudasPage implements OnInit {
     };
   }
 
-  async openModalForm(){
+  async openModalForm(deudaEdit?: DeudaModel){
 
     const modal = await this.modalCtrol.create(
       {
@@ -55,7 +55,9 @@ export class DeudasPage implements OnInit {
         mode: 'md',
         component: FormComponent,
         swipeToClose: false,
-        presentingElement: this.routerOutlet.nativeEl
+        presentingElement: this.routerOutlet.nativeEl,
+        componentProps: deudaEdit ? {deudaEdit} : null
+
       }
     );
 
@@ -111,6 +113,10 @@ export class DeudasPage implements OnInit {
         this.getDeudas();
       }
     });
+  }
+
+  async openModalEdit(deuda: DeudaModel): Promise<void>{
+    this.openModalForm(deuda);
   }
 
 }

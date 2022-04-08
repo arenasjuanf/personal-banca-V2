@@ -23,13 +23,20 @@
                       Tipo: {{ getTipoAhorro(ahorro.tipo_ahorro) }}
                     </small>
                   </ion-card-subtitle>
-                  <ion-card-subtitle>Falta: {{ (ahorro.objetivo - ahorro.ahorrado) | currency:"$":"symbol"  }}</ion-card-subtitle>
+                  <ion-card-subtitle class="meta-tipo">
+                    <span>
+                      Falta: {{ (ahorro.objetivo - ahorro.ahorrado) | currency:"$":"symbol"  }}
+                    </span>
+                    <span *ngIf="ahorro?.fechaMeta">
+                      Fecha Meta: {{ ahorro.fechaMeta | date}}
+                    </span>
+                  </ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content class="ion-text-end">
                   <ion-button color="primary" (click)="openModalView(ahorro)">
                     <ion-icon name="eye"></ion-icon>
                   </ion-button>
-                  <ion-button color="secondary">
+                  <ion-button color="secondary" (click)="openModalEdit(ahorro)">
                     <ion-icon name="create"></ion-icon>
                   </ion-button>
                   <ion-button color="danger" (click)="alertDelete(ahorro)">

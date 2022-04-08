@@ -1,4 +1,4 @@
-<app-header title="Crear Ahorro" [datos]="headerOptions"></app-header>
+<app-header title="{{ deudaEdit ? 'Actualizar' : 'Crear' }} Ahorro" [datos]="headerOptions"></app-header>
 <ion-content>
   <ion-list lines="none" class="ion-no-margin" [formGroup]="form">
     <ion-item>
@@ -21,6 +21,6 @@
 </ion-content>
 
 <ion-footer class="ion-text-center ion-no-border" collapse="fade">
-  <ion-button color="primary" [disabled]="form.invalid"  (click)="save()" > Guardar </ion-button>
+  <ion-button color="primary" [disabled]="form.invalid"  (click)="save()" > {{ deudaEdit ? 'Actualizar' : 'Guardar' }} </ion-button>
   <ion-button color="danger" (click)="modalCtrl.dismiss()"> Cancelar </ion-button>
 </ion-footer>

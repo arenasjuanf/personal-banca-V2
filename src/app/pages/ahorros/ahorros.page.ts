@@ -46,25 +46,26 @@ export class AhorrosPage implements OnInit {
     };
   }
 
-  async openModalForm(){
+  async openModalForm(ahorroEdit?: AhorroModel){
     const modal: HTMLIonModalElement = await this.modalCtrol.create(
       {
         animated: true,
         mode: 'md',
         component: FormComponent,
         swipeToClose: false,
-        presentingElement: this.routerOutlet.nativeEl
+        presentingElement: this.routerOutlet.nativeEl,
+        componentProps: ahorroEdit ? {ahorroEdit} : null
       }
     );
     await modal.present();
     const {update} = (await modal.onDidDismiss()).data || {};
     if(update){
-      this.loading.show('Cargando ahorros');
+      await this.loading.show('Cargando ahorros');
       this.getAhorros();
     }
   }
 
-  async openModalView(ahorro: AhorroModel){
+  async openModalView(ahorro: AhorroModel): Promise<void>{
     const modal: HTMLIonModalElement = await this.modalCtrol.create(
       {
         animated: true,
@@ -81,6 +82,10 @@ export class AhorrosPage implements OnInit {
         this.loading.show('Cargando ahorros');
         this.getAhorros();
       }
+  }
+
+  async openModalEdit(ahorro: AhorroModel): Promise<void>{
+    this.openModalForm(ahorro);
   }
 
   async alertDelete(ahorro: AhorroModel): Promise<void>{
