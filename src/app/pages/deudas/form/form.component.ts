@@ -64,6 +64,10 @@ export class FormComponent implements OnInit {
   }
 
   async save(): Promise<void>{
+    if(this.form.value.requiereFecha){
+      delete this.form.value.fechaMeta;
+    }
+
     (await this.deudasService.save(this.form.value, this.deudaEdit ? true : false)).subscribe(({success}) => {
       if(success){
         this.modalCtrl.dismiss({update: true});

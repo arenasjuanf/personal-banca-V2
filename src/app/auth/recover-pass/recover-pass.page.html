@@ -1,0 +1,41 @@
+
+
+
+<ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      
+      <ion-col  size-md="6" size-xs="12">
+        <ion-img src="./assets/icon/logo.svg" class="ion-padding"></ion-img>
+      </ion-col>
+
+
+      <ion-col size-md="6" size-xs="12" class="ion-padding form-cont" [formGroup]="form">
+
+        <ion-text class="ion-text-center">
+          <ion-icon size="large" name="chevron-back-outline" class="pointer" routerLink="auth"></ion-icon>
+          <h1>Recupera tu contraseña</h1>
+          <ion-icon name="" ></ion-icon>
+        </ion-text>
+
+        <ion-label>Se enviará un código de recuperación de clave al correo registrado</ion-label>
+
+        <ion-item  class="input" >
+          <ion-input placeholder="Ejemplo@personalbanca.com" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.required?.message }}</ion-note>  
+        <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.email?.message }}</ion-note>  
+
+
+        <!-- eslint-disable-next-line max-len -->
+        <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" [disabled]="form.invalid" (click)="sendRecoverMail()">
+          <ion-icon name="enter-outline" slot="start"></ion-icon>
+          Enviar correo
+          <ion-ripple-effect></ion-ripple-effect>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

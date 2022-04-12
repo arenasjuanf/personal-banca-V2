@@ -36,4 +36,8 @@ export class AuthService {
     }
   }
 
+  sendRecoverMail(email: string){
+    return this.http.get(`enviarPin/${email}`);
+  }
+
 }

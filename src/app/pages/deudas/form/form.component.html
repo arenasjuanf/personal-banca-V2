@@ -1,11 +1,11 @@
-<app-header title="{{ deudaEdit ? 'Actualizar' : 'Crear' }} Ahorro" [datos]="headerOptions"></app-header>
+<app-header title="{{ deudaEdit ? 'Actualizar' : 'Crear' }} Deuda" [datos]="headerOptions"></app-header>
 <ion-content>
   <ion-list lines="none" class="ion-no-margin" [formGroup]="form">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!deudaEdit">
       <ion-label position="floating">Valor Deuda</ion-label>
       <ion-input placeholder="¿Cuanto quieres ahorrar?" formControlName="objetivo" type="number"></ion-input>
     </ion-item>

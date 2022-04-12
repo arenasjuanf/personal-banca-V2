@@ -8,7 +8,7 @@ export class LoginModel {
 
     @prop()
     @required({message: 'campo requerido'})
-    password = 'Juanf123*';
+    password = 'Juanf123';
 
     @prop()
     mantenerSesion = false;

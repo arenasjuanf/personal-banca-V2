@@ -29,7 +29,7 @@ export class AhorroModel {
     requiereFecha = false;
 
     @required({message: 'campo requerido',  conditionalExpression: (model) => !model.requiereFecha})
-    fechaMeta = '';
+    fechaMeta;
 
     @prop()
     id?:  number;

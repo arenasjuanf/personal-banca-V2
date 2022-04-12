@@ -48,6 +48,13 @@
           </ion-grid>          
         </ion-card>
       </ion-col>
+      <ion-col size="12" *ngIf="!list?.length">
+        <ion-card class="ion-padding">
+          <ion-card-title class="ion-text-center">
+            No tienes ahorros
+          </ion-card-title>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

@@ -25,8 +25,8 @@ export class FormComponent implements OnInit {
     private formService: FormsService,
     private ahorrosService: AhorrosService
   ) {
+    console.log('constructor');
     this.form = this.formService.initForm(AhorroModel);
-    this.form.get('requiereFecha').valueChanges.subscribe((result) => console.log(result));
     this.initHeaderOptions();
   }
 
@@ -62,6 +62,11 @@ export class FormComponent implements OnInit {
   }
 
   async save(): Promise<void>{
+
+    if(this.form.value.requiereFecha){
+      delete this.form.value.fechaMeta;
+    }
+
     (await this.ahorrosService.save(this.form.value, this.ahorroEdit ? true : false)).subscribe(({success}) => {
       if(success){
         this.modalCtrl.dismiss({update: true});

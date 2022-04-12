@@ -21,7 +21,14 @@
                       Valor: {{ deuda.objetivo | currency:"$":"symbol"  }}
                     </span>                    
                   </ion-card-subtitle>
-                  <ion-card-subtitle>Falta: {{ (deuda.objetivo - deuda.ahorrado) | currency:"$":"symbol"  }}</ion-card-subtitle>
+                  <ion-card-subtitle class="meta-tipo">
+                    <span>
+                      Falta: {{ (deuda.objetivo - deuda.ahorrado) | currency:"$":"symbol"  }}
+                    </span>
+                    <span *ngIf="deuda?.fechaMeta">
+                      Fecha Meta: {{ deuda.fechaMeta | date}}
+                    </span>
+                  </ion-card-subtitle>
                 </ion-card-header>
                 <ion-card-content class="ion-text-end">
                   <ion-button color="primary" (click)="openModalView(deuda)">
@@ -37,6 +44,13 @@
               </ion-col>
             </ion-row>
           </ion-grid>          
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" *ngIf="!list?.length">
+        <ion-card class="ion-padding">
+          <ion-card-title class="ion-text-center">
+            No tienes deudas
+          </ion-card-title>
         </ion-card>
       </ion-col>
     </ion-row>
