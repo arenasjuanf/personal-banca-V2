@@ -18,21 +18,51 @@
           <ion-icon name="" ></ion-icon>
         </ion-text>
 
-        <ion-label>Se enviará un código de recuperación de clave al correo registrado</ion-label>
+        <ng-container *ngIf="!ingresarPin">
 
-        <ion-item  class="input" >
-          <ion-input placeholder="Ejemplo@personalbanca.com" formControlName="correo"></ion-input>
-        </ion-item>
-        <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.required?.message }}</ion-note>  
-        <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.email?.message }}</ion-note>  
+          <ion-label>Se enviará un código de recuperación de clave al correo registrado</ion-label>
+
+          <ion-item  class="input text-center" >
+            <ion-input placeholder="Ejemplo@personalbanca.com" formControlName="correo"></ion-input>
+          </ion-item>
+          <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.required?.message }}</ion-note>  
+          <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.email?.message }}</ion-note>  
+  
+          <!-- eslint-disable-next-line max-len -->
+          <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" [disabled]="form.invalid" (click)="sendRecoverMail()">
+            <ion-icon name="enter-outline" slot="start"></ion-icon>
+            Enviar correo
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+
+        </ng-container>
+
+        <ng-container  *ngIf="ingresarPin">
+          <ion-label class="text-center" >Ingresa el pin enviado al correo electrónico </ion-label>
+
+          <ion-item  class="input text-center" >
+            <ion-input type="number" required #pinInput></ion-input>
+          </ion-item>
+          <ion-note  color="danger">{{ forms.getErrors(form, 'correo')?.required?.message }}</ion-note>  
+         
+  
+          <!-- eslint-disable-next-line max-len -->
+          <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" (click)="confirmPin(pinInput.value)">
+            <ion-icon name="enter-outline" slot="start"></ion-icon>
+              Confirmar Pin
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+
+          <!-- eslint-disable-next-line max-len -->
+          <ion-button color="danger" class="login-button ion-activatable ripple-parent" shape="round" (click)="ingresarPin = false">
+            <ion-icon name="enter-outline" slot="start"></ion-icon>
+              Cancelar
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+
+        </ng-container>
 
 
-        <!-- eslint-disable-next-line max-len -->
-        <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" [disabled]="form.invalid" (click)="sendRecoverMail()">
-          <ion-icon name="enter-outline" slot="start"></ion-icon>
-          Enviar correo
-          <ion-ripple-effect></ion-ripple-effect>
-        </ion-button>
 
       </ion-col>
     </ion-row>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { HttpResponseModel } from '../models/httpResponse.model';
 import { RegisterModel } from '../models/register.model';
 import { HttpService } from './http.service';
@@ -14,7 +13,7 @@ export class AuthService {
   constructor(
     private http: HttpService,
     private storage: StorageService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -26,7 +25,7 @@ export class AuthService {
     return this.http.post(`registrar`, data);
   }
 
-  async logout(){
+  async logout(): Promise<void>{
     try{
       await this.storage.clearAll();
       this.router.navigateByUrl('auth');
@@ -36,8 +35,16 @@ export class AuthService {
     }
   }
 
-  sendRecoverMail(email: string){
+  sendRecoverMail(email: string): Observable<any>{
     return this.http.get(`enviarPin/${email}`);
+  }
+
+  sendRecoverPin(email: string, pin: string | number ){
+    return this.http.get(`validarPin/${email}/${pin}`);
+  }
+
+  setNewPassword(email:string, pass:string){
+    return this.http.put(`nuevaPassword`, {email, pass });
   }
 
 }
