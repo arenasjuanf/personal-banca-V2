@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
+import { AlertController, IonRouterOutlet, IonSegment, ModalController } from '@ionic/angular';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -16,13 +16,14 @@ export class AhorrosPage implements OnInit {
   public list: any[];
   public headerOptions: { endIcon: string; endFunction: () => void};
   public getTipoAhorro = Globals.getTipoAhorro;
+  fullList: any;
 
   constructor(
     private ahorros: AhorrosService,
     private modalCtrol: ModalController,
     private routerOutlet: IonRouterOutlet,
     private alert: AlertController,
-    private loading: LoadingService
+    private loading: LoadingService,
   ) {
     this.initHeaderOptions();
     this.loading.show('Cargando ahorros');
@@ -34,6 +35,7 @@ export class AhorrosPage implements OnInit {
 
   async getAhorros(){
     (await this.ahorros.getAll(1)).subscribe((list: any) => {
+      this.fullList = list;
       this.list = list;
       this.loading.hide();
     });
@@ -94,7 +96,7 @@ export class AhorrosPage implements OnInit {
       message: 'Está seguro de eliminar el ahorro?',
       buttons: [{
         text: 'Si',
-        handler: (result) => {
+        handler: (__) => {
           this.delete(ahorro);
         }
       },
@@ -113,6 +115,17 @@ export class AhorrosPage implements OnInit {
         this.getAhorros();
       }
     });
+  }
+
+  filtrar(event: any){
+    const value = event?.detail?.value;
+    const options = {
+      0: () => this.list = this.fullList,
+      1: () => this.list = this.fullList.filter( i => !i.compartido),
+      2: () => this.list = this.fullList.filter( i => i.compartido)
+    };
+
+    options[value]();
   }
 
 }

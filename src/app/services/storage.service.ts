@@ -53,8 +53,7 @@ export class StorageService {
 
   async clearAll(){
     try{
-      await this.initStorage();
-      await this.storage.clear();
+      await Promise.all([this.initStorage(), this.storage.clear()]);
       return true;
     }catch(e){
       console.log(e);

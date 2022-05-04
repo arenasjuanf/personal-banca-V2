@@ -99,7 +99,7 @@ export class RecoverPassPage implements OnInit {
 
   async showAlertPassword(){
     const alert = await this.alertController.create({
-      header: 'Cuanto vas a ahorrar?',
+      header: 'Ingresa la nueva contraseña',
       inputs: [
         {
           name: 'pass',

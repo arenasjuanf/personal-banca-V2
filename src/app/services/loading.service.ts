@@ -29,10 +29,18 @@ export class LoadingService {
 
   async hide(): Promise<void>{
     this.flagLoading.pipe(take(1)).toPromise().then(() => {
-      timer(1000).subscribe(() => {
-        this.currentLoading.dismiss();
-        this.flagLoading.next(false);
-      });
+      try{
+        timer(1000).subscribe(() => {
+          this.currentLoading.dismiss();
+          this.flagLoading.next(false);
+        });
+      }
+      catch(e){
+        timer(1000).subscribe(() => {
+          this.currentLoading.dismiss();
+          this.flagLoading.next(false);
+        });
+      }
     });
   }
 

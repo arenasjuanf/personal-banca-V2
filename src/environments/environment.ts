@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlServer: 'http://127.0.0.1:8000/api',
+  urlServer: 'https://apparqueo.com/personalBancaBack2/public/api', //'http://127.0.0.1:8000/api',
   localDbName: '__personalBancaDB',
   newsKey: '641ea49d59d742dc96150ae569886319',
   newsUrl: 'https://newsapi.org/v2'

@@ -1,0 +1,14 @@
+<ion-list lines="full">
+  <ion-list-header lines="full">
+    <ion-label>Agregar contacto</ion-label>
+    <ion-button (click)="goContacts()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </ion-list-header>
+
+  <ion-item *ngFor="let contacto of listaContactos" (click)="selectContact(contacto)">
+    <ion-label>{{ contacto.nombre | titlecase }}</ion-label>
+    <ion-icon slot="end" [name]="isSelected(contacto) ?  'checkbox-outline' : 'square-outline' "></ion-icon>
+  </ion-item>
+ 
+</ion-list>

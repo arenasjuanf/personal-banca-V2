@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
+import { ContactsChooserComponent } from 'src/app/components/contacts-chooser/contacts-chooser.component';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { FormsService } from 'src/app/services/forms.service';
@@ -23,10 +24,11 @@ export class FormComponent implements OnInit {
     public modalCtrl: ModalController,
     private popoverCtrl: PopoverController,
     private formService: FormsService,
-    private ahorrosService: AhorrosService
+    private ahorrosService: AhorrosService,
+    public popoverController: PopoverController
   ) {
     console.log('constructor');
-    this.form = this.formService.initForm(AhorroModel);
+    this.form = this.formService.initForm(new AhorroModel());
     this.initHeaderOptions();
   }
 
@@ -72,6 +74,27 @@ export class FormComponent implements OnInit {
         this.modalCtrl.dismiss({update: true});
       }
     });
+  }
+
+  async showContacts(ev: any) {
+    const popover = await this.popoverController.create({
+      component: ContactsChooserComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+      alignment: 'center',
+      componentProps: {
+        idAhorro: this.ahorroEdit.id
+      }
+    });
+    await popover.present();
+
+    const { role, data } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  si(){
+    console.log(this.form)
   }
 
 }

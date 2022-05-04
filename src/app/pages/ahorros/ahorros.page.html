@@ -1,4 +1,15 @@
 <app-header title="Ahorros" [datos]="headerOptions"></app-header>
+<ion-segment mode="ios" id="segment" (ionChange)="filtrar($event)" value="0"  color="primary">
+  <ion-segment-button value="0">
+    <ion-label>Todos</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="1">
+    <ion-label>Propios</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>Compartidos</ion-label>
+  </ion-segment-button>
+</ion-segment>
 <ion-content>
   <ion-grid fixed>
     <ion-row>

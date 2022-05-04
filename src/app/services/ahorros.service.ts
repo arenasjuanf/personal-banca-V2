@@ -55,4 +55,12 @@ export class AhorrosService {
     return this.http.delete(`borrarAhorro`,{idAhorro,tipo});
   }
 
+  shareSaving(userId: number, savingId: number, remove: boolean){
+    return this.http.post('compartirAhorro', {userId, savingId, remove});
+  }
+
+  getSharedSavingsUsers(ahorroId: number){
+    return this.http.get(`listarUsuariosCompartidos/${ahorroId}`);
+  }
+
 }

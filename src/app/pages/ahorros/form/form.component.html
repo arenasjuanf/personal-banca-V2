@@ -19,13 +19,21 @@
       <ion-label position="floating">Intervalo</ion-label>
       <ion-input formControlName="intervalo" placeholder="Intervalo de lo que vas a ahorrar"  type="number"></ion-input>
     </ion-item>
-    <ion-item >
+    <ion-item>
       <ion-label>Sin fecha meta</ion-label>
-      <ion-toggle formControlName="requiereFecha"></ion-toggle>
+
+      <ion-checkbox slot="end" formControlName="requiereFecha"></ion-checkbox>
     </ion-item>
     <ion-item *ngIf="!form.get('requiereFecha').value">
       <ion-label position="floating">Fecha Meta</ion-label>
       <ion-input formControlName="fechaMeta" (click)="openDatePicker()" readonly></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="ahorroEdit">
+      <ion-label>Compartir Ahorro</ion-label>
+      <ion-button id="share-button" expand="block" fill="clear" shape="round" (click)="showContacts($event)">
+        <ion-icon  name="people" ></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>
