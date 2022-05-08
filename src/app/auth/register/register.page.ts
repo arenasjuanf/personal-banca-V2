@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
 import { RegisterModel } from 'src/app/models/register.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -28,6 +29,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
+
   register(){
     if(this.form.invalid){
       this.form.markAllAsTouched();
@@ -48,5 +50,4 @@ export class RegisterPage implements OnInit {
 
     });
   }
-
 }

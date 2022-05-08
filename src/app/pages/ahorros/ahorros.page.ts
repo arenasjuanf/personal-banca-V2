@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, IonRouterOutlet, IonSegment, ModalController } from '@ionic/angular';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
 import { Globals } from 'src/app/shared/globals';
 import { FormComponent } from './form/form.component';
 import { VistaComponent } from './vista/vista.component';
@@ -24,6 +26,7 @@ export class AhorrosPage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private alert: AlertController,
     private loading: LoadingService,
+    private toast: ToastService
   ) {
     this.initHeaderOptions();
     this.loading.show('Cargando ahorros');
@@ -113,6 +116,17 @@ export class AhorrosPage implements OnInit {
     this.ahorros.delete(ahorro.id, ahorro.tipo).subscribe(({success}) => {
       if(success){
         this.getAhorros();
+      }
+      this.loading.hide();
+    },(except: HttpErrorResponse) => {
+      const {error} = except;
+      if (error.message.includes('Integrity constraint') ){
+        this.toast.show({
+          message: 'No se puede eliminar ahorro ya que está compartido',
+          icon: 'close',
+          duration: 1500
+        });
+        this.loading.hide();
       }
     });
   }

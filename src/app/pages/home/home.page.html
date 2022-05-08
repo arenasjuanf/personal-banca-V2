@@ -1,3 +1,62 @@
-<ion-content>
+<app-header title="Información"></app-header>
 
-</ion-content>
+<ion-content>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size-md="4" size="6">
+          <ion-card class="pointer ahorros" routerDirection="root" routerLink="/pages/ahorros">
+            <ion-card-content>
+                <ion-text color="light">
+                    <h1>{{ contadores[0] || 0 }}</h1>
+                </ion-text>
+            </ion-card-content>
+            <div class="footer">
+                <ion-text >
+                    <p>
+                        <ion-icon name="cash-outline"></ion-icon>
+                        Ahorros
+                    </p>
+                </ion-text>
+            </div>
+          </ion-card>
+        </ion-col>
+
+        <ion-col  size-md="4" size="6">    
+            <ion-card class="pointer deudas" routerDirection="root" routerLink="/pages/deudas">
+                <ion-card-content>
+                    <ion-text color="light">
+                        <h1>{{ contadores[1] || 0 }}</h1>
+                    </ion-text>
+                </ion-card-content>
+                <div class="footer">
+                    <ion-text >
+                        <p>
+                            <ion-icon name="wallet-outline"></ion-icon>
+                            Deudas
+                        </p>
+                    </ion-text>
+                </div>
+            </ion-card>
+        </ion-col>
+
+        <ion-col  size-md="4" size="6">
+            <ion-card class="pointer contactos" routerDirection="root" routerLink="/pages/contactos">
+                <ion-card-content>
+                    <ion-text color="light">
+                        <h1>{{ contadores[2] || 0 }}</h1>
+                    </ion-text>
+                </ion-card-content>
+                <div class="footer">
+                    <ion-text >
+                        <p>
+                            <ion-icon name="people-outline"></ion-icon>
+                            Contactos
+                        </p>
+                    </ion-text>
+                </div>
+            </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  
