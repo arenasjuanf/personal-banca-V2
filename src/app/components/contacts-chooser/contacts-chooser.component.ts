@@ -72,7 +72,7 @@ export class ContactsChooserComponent implements OnInit {
   }
 
   traerUsuariosAhorro(){
-    this.ahorrosSvc.getSharedSavingsUsers(this.idAhorro).pipe(tap(console.log)).subscribe((users) => this.users = users);
+    this.ahorrosSvc.getSharedSavingsUsers(this.idAhorro).subscribe((users) => this.users = users);
   }
 
   isSelected(contact: contacto): boolean {

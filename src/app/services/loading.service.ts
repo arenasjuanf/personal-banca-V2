@@ -21,7 +21,6 @@ export class LoadingService {
       message,
       cssClass: 'my-custom-class',
     });
-    console.log(this.currentLoading);
     this.currentLoading.present().then(() => {
       this.flagLoading.next(true);
     });

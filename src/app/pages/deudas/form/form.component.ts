@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { DeudaModel } from 'src/app/models/deuda.model';
-import { AhorrosService } from 'src/app/services/ahorros.service';
 import { DeudasService } from 'src/app/services/deudas.service';
 import { FormsService } from 'src/app/services/forms.service';
 import { Globals } from 'src/app/shared/globals';
@@ -29,6 +29,14 @@ export class FormComponent implements OnInit {
     private deudasService: DeudasService
   ) {
     this.form = this.formService.initForm(new DeudaModel());
+    this.form.get('requiereFecha').valueChanges.subscribe((value) => {
+      if(value){
+        this.form.get('fechaMeta').clearValidators();
+      }else{
+        this.form.get('fechaMeta').setValidators(Validators.required);
+      }
+      this.form.get('fechaMeta').updateValueAndValidity();
+    });
     this.initHeaderOptions();
   }
 

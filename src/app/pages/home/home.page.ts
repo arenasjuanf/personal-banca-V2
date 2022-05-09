@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { ContactsService } from 'src/app/services/contacts.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -15,9 +16,11 @@ export class HomePage implements OnInit {
     private contactos: ContactsService,
     private ahorros: AhorrosService,
     private storage: StorageService,
+    private loading: LoadingService
   ) {}
 
   ngOnInit() {
+    this.loading.show('Cargando datos');
     this.getContadores();
   }
 
@@ -35,7 +38,7 @@ export class HomePage implements OnInit {
       contactos.length
     ];
 
-
+    this.loading.hide();
   }
 
 }

@@ -46,7 +46,7 @@ export class StorageService {
       await this.storage.remove(item);
       return true;
     }catch(e){
-      console.log(e);
+      console.error(e);
       return false;
     }
   }
@@ -56,7 +56,7 @@ export class StorageService {
       await Promise.all([this.initStorage(), this.storage.clear()]);
       return true;
     }catch(e){
-      console.log(e);
+      console.error(e);
       return false;
     }
   }

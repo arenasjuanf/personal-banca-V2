@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AlertController, IonRouterOutlet, IonSegment, ModalController } from '@ionic/angular';
 import { AhorroModel } from 'src/app/models/ahorro.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
@@ -14,11 +15,13 @@ import { VistaComponent } from './vista/vista.component';
   templateUrl: './ahorros.page.html',
   styleUrls: ['./ahorros.page.scss'],
 })
-export class AhorrosPage implements OnInit {
+export class AhorrosPage implements OnInit, AfterViewInit {
+  @ViewChild('IonSegment') segment: IonSegment;
   public list: any[];
   public headerOptions: { endIcon: string; endFunction: () => void};
   public getTipoAhorro = Globals.getTipoAhorro;
   fullList: any;
+  filterValue: number;
 
   constructor(
     private ahorros: AhorrosService,
@@ -26,22 +29,33 @@ export class AhorrosPage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private alert: AlertController,
     private loading: LoadingService,
-    private toast: ToastService
+    private toast: ToastService,
+    private aRoute: ActivatedRoute
   ) {
     this.initHeaderOptions();
-    this.loading.show('Cargando ahorros');
-    this.getAhorros();
+
+    this.aRoute.params.subscribe((params) => {
+      if(params.create){
+        this.openModalForm();
+      }
+    });
   }
 
   ngOnInit() {
   }
 
+  ngAfterViewInit(): void {
+    this.loading.show('Cargando ahorros');
+    this.getAhorros();
+  }
+
   async getAhorros(){
     (await this.ahorros.getAll(1)).subscribe((list: any) => {
       this.fullList = list;
-      this.list = list;
       this.loading.hide();
+      this.filtrar();
     });
+
   }
 
   initHeaderOptions(){
@@ -68,6 +82,7 @@ export class AhorrosPage implements OnInit {
       await this.loading.show('Cargando ahorros');
       this.getAhorros();
     }
+
   }
 
   async openModalView(ahorro: AhorroModel): Promise<void>{
@@ -131,15 +146,15 @@ export class AhorrosPage implements OnInit {
     });
   }
 
-  filtrar(event: any){
-    const value = event?.detail?.value;
+  filtrar(){
+
     const options = {
       0: () => this.list = this.fullList,
       1: () => this.list = this.fullList.filter( i => !i.compartido),
       2: () => this.list = this.fullList.filter( i => i.compartido)
     };
 
-    options[value]();
+    options[this.segment.value || 0 ]();
   }
 
 }

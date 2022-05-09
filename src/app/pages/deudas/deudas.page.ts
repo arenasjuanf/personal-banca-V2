@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AlertController, IonRouterOutlet, ModalController } from '@ionic/angular';
 import { DeudaModel } from 'src/app/models/deuda.model';
 import { AhorrosService } from 'src/app/services/ahorros.service';
@@ -24,10 +25,16 @@ export class DeudasPage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private loading: LoadingService,
     private alert: AlertController,
+    private aRoute: ActivatedRoute
   ) {
     this.initHeaderOptions();
     this.loading.show('Cargando deudas');
     this.getDeudas();
+    this.aRoute.params.subscribe((params) => {
+      if(params.create){
+        this.openModalForm();
+      }
+    });
   }
 
   ngOnInit() {

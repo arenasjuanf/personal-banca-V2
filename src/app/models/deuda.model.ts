@@ -19,9 +19,10 @@ export class DeudaModel {
 
 
     @prop()
-    requiereFecha: boolean;
+    requiereFecha = false;
 
-    @required({message: 'campo requerido',  conditionalExpression: (model: DeudaModel) => !model.requiereFecha})
+    //  conditionalExpression: (model) => model.requiereFecha ? true : false
+    @required({message: 'campo requerido'})
     fechaMeta: string;
 
     @prop()

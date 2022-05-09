@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ModalController, PopoverController } from '@ionic/angular';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
@@ -27,8 +28,15 @@ export class FormComponent implements OnInit {
     private ahorrosService: AhorrosService,
     public popoverController: PopoverController
   ) {
-    console.log('constructor');
     this.form = this.formService.initForm(new AhorroModel());
+    this.form.get('requiereFecha').valueChanges.subscribe((value) => {
+      if(value){
+        this.form.get('fechaMeta').clearValidators();
+      }else{
+        this.form.get('fechaMeta').setValidators(Validators.required);
+      }
+      this.form.get('fechaMeta').updateValueAndValidity();
+    });
     this.initHeaderOptions();
   }
 
@@ -90,11 +98,7 @@ export class FormComponent implements OnInit {
     await popover.present();
 
     const { role, data } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
-  si(){
-    console.log(this.form)
-  }
 
 }
