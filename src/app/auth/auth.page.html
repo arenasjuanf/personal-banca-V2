@@ -38,8 +38,9 @@
         </ion-item>
 
         <ion-button color="primary" class="login-button ion-activatable ripple-parent" shape="round" (click)="login()">
-          <ion-icon name="enter-outline" slot="start"></ion-icon>
-          Ingresar
+          <ion-icon name="enter-outline" slot="start" *ngIf="!loading" ></ion-icon>
+          <ion-spinner name="lines" *ngIf="loading"></ion-spinner>
+          {{ loading ? 'Ingresando' : 'Ingresar' }} 
           <ion-ripple-effect></ion-ripple-effect>
         </ion-button>
 

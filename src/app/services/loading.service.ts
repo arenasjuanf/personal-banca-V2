@@ -12,7 +12,7 @@ export class LoadingService {
   private flagLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    public loadingController: LoadingController
+    private loadingController: LoadingController
   ) {
   }
 

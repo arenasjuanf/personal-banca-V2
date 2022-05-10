@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular/providers/loading-controller';
 import { RxFormGroup } from '@rxweb/reactive-form-validators';
+import { timer } from 'rxjs';
 import { LoginModel } from '../models/login.model';
 import { AuthService } from '../services/auth.service';
 import { FormsService } from '../services/forms.service';
@@ -16,14 +18,14 @@ import { ToastService } from '../services/toast.service';
 export class AuthPage implements OnInit {
 
   form: RxFormGroup;
+  loading: boolean;
 
   constructor(
     private router: Router,
     public forms: FormsService,
     private authService: AuthService,
     private storage: StorageService,
-    private loading: LoadingService,
-    private toast: ToastService
+    private toast: ToastService,
   ) {
     this.form = this.forms.initForm(new LoginModel());
   }
@@ -41,12 +43,14 @@ export class AuthPage implements OnInit {
       return;
     }
     const {email, password } = this.form.value;
-    this.loading.show('Iniciando sesión ...');
+    this.loading = true;
     this.authService.login(email, password).subscribe(async ({success, msj}) => {
       const {pass, pin, ...userData}  = msj;
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       if(success){
         await this.storage.set('user', userData);
+        this.loading = false;
+
         this.router.navigateByUrl('pages/home');
       }else{
         this.toast.show({
@@ -56,7 +60,8 @@ export class AuthPage implements OnInit {
           duration: 1500
         });
       }
-      this.loading.hide();
+      this.loading = false;
+
     });
   }
 }
