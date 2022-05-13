@@ -1,21 +1,21 @@
-<app-header title="Crear Ahorro" [datos]="headerOptions"></app-header>
+<app-header title="{{ ahorroEdit ? 'Actualizar' : 'Crear' }} Ahorro" [datos]="headerOptions"></app-header>
 <ion-content>
   <ion-list lines="none" class="ion-no-margin" [formGroup]="form">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!ahorroEdit">
       <ion-label position="floating">Objetivo ahorro</ion-label>
       <ion-input placeholder="¿Cuanto quieres ahorrar?" formControlName="objetivo" type="number"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="!ahorroEdit">
       <ion-label position="floating">Tipo de ahorro</ion-label>
       <ion-select interface="action-sheet" mode="ios" formControlName="tipo_ahorro">
         <ion-select-option *ngFor="let tipo of tiposAhorro"  [value]="tipo.id">{{ tipo.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="form.get('tipo_ahorro').value === 2">
+    <ion-item *ngIf="form.get('tipo_ahorro').value === 2 && !ahorroEdit" >
       <ion-label position="floating">Intervalo</ion-label>
       <ion-input formControlName="intervalo" placeholder="Intervalo de lo que vas a ahorrar"  type="number"></ion-input>
     </ion-item>
@@ -27,10 +27,17 @@
       <ion-label position="floating">Fecha Meta</ion-label>
       <ion-input formControlName="fechaMeta" (click)="openDatePicker()" readonly></ion-input>
     </ion-item>
+
+    <ion-item *ngIf="ahorroEdit">
+      <ion-label>Compartir Ahorro</ion-label>
+      <ion-button id="share-button" expand="block" fill="clear" shape="round" (click)="showContacts($event)">
+        <ion-icon  name="people" ></ion-icon>
+      </ion-button>
+    </ion-item>
   </ion-list>
 </ion-content>
 
 <ion-footer class="ion-text-center ion-no-border" collapse="fade">
-  <ion-button color="primary" [disabled]="form.invalid"  (click)="save()" > Guardar </ion-button>
+  <ion-button color="primary" [disabled]="form.invalid"  (click)="save()" > {{ ahorroEdit ? 'Actualizar' : 'Guardar' }} </ion-button>
   <ion-button color="danger" (click)="modalCtrl.dismiss()"> Cancelar </ion-button>
 </ion-footer>

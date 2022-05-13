@@ -3,6 +3,7 @@
     border-radius: 10px;
     border: 4px solid #5a74f836;
     margin: auto;
+    background-color: #6fa1f50a;
 
     h5{
         text-align: center;
@@ -12,12 +13,22 @@
     }
     ion-card-subtitle{
         font-weight: 600;
-
+        margin-top: 2px;
+    }
+    ion-card-content{
+        padding: 10px 0 0 0;
     }
     ion-progress-bar{
         height: 7px;
         border-radius: 5px;
         --progress-background: var(--violet);
+    }
+    ion-progress-bar{
+        margin-bottom: 5px;
+    }
+    .meta-tipo{
+        display: flex;
+        justify-content: space-between;
     }
 }
 
@@ -31,4 +42,9 @@ ion-content::part(background){
     margin: 4px;
     border-radius: 20px;
     background-color: #e3edff33;
+}
+
+#segment{
+    width: 99%;
+    margin: auto;
 }

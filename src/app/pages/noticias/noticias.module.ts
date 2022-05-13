@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { NoticiasPageRoutingModule } from './noticias-routing.module';
 
 import { NoticiasPage } from './noticias.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NoticiasPageRoutingModule
+    NoticiasPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [NoticiasPage]
+  declarations: [NoticiasPage],
+  providers: [ ]
 })
 export class NoticiasPageModule {}

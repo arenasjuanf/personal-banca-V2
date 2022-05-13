@@ -1,45 +1,72 @@
 <app-header title="Ahorros" [datos]="headerOptions"></app-header>
+<ion-segment #IonSegment mode="ios" id="segment" (ionChange)="filtrar()" value="0"  color="primary">
+  <ion-segment-button value="0">
+    <ion-label>Todos</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="1">
+    <ion-label>Propios</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label>Compartidos</ion-label>
+  </ion-segment-button>
+</ion-segment>
 <ion-content>
   <ion-grid fixed>
     <ion-row>
-      <ion-col size="12" size-md="6" *ngFor="let ahorro of list" >
-        <ion-card class="pointer item" (click)="openModalView(ahorro)">
+      <ion-col size="12" size-md="4" *ngFor="let ahorro of list" >
+        <ion-card class="pointer item">
           <ion-grid fixed>
             <ion-row>
-              <ion-col size="6" class="col-data">
+              <ion-col size="12">
                 <ion-card-header class="ion-no-padding">
                   <ion-text>
                     <h5>
                       {{ ahorro.nombre | titlecase }}
                     </h5>
                   </ion-text>
-                  <ion-card-subtitle>Meta: {{ ahorro.objetivo | currency:"$":"symbol"  }}</ion-card-subtitle>
-                  <ion-card-subtitle>Falta: {{ (ahorro.objetivo - ahorro.ahorrado) | currency:"$":"symbol"  }}</ion-card-subtitle>
+                  <ion-card-subtitle>{{ahorro.percent}}%</ion-card-subtitle>
+                  <ion-progress-bar value="{{ahorro.percent/100}}" ></ion-progress-bar>
+                  <ion-card-subtitle class="meta-tipo">                     
+                    <span>
+                      Meta: {{ ahorro.objetivo | currency:"$":"symbol"  }}
+                    </span>                    
+                    <small>
+                      Tipo: {{ getTipoAhorro(ahorro.tipo_ahorro) }}
+                    </small>
+                  </ion-card-subtitle>
+                  <ion-card-subtitle class="meta-tipo">
+                    <span>
+                      Falta: {{ (ahorro.objetivo - ahorro.ahorrado) | currency:"$":"symbol"  }}
+                    </span>
+                    <span *ngIf="ahorro?.fechaMeta">
+                      <small>
+                        Fecha Meta: {{ ahorro.fechaMeta | date}}
+                      </small> 
+                    </span>
+                  </ion-card-subtitle>
+                  
                 </ion-card-header>
-              </ion-col>
-              <ion-col size="6">
-                <ion-row>
-                  <ion-col size="10">
-                    <small>Tipo: {{ getTipoAhorro(ahorro.tipo_ahorro) }}</small>
-                  </ion-col>
-                  <ion-col size="2" class="ion-text-end">
-                    <ion-icon color="danger" name="trash"></ion-icon>
-                    <!--
-                      <ion-button >
-                        <ion-icon slot="icon-only" name="create"></ion-icon>
-                      </ion-button>
-                    -->
-                  </ion-col>
-                  <ion-col size="12">
-                    <ion-card-content class="ion-no-padding">
-                      <ion-card-subtitle>{{ahorro.percent}}%</ion-card-subtitle>
-                      <ion-progress-bar value="{{ahorro.percent/100}}" ></ion-progress-bar>
-                    </ion-card-content>
-                  </ion-col>
-                </ion-row>
+                <ion-card-content class="ion-text-end">
+                  <ion-button shape="round" color="primary" (click)="openModalView(ahorro)">
+                    <ion-icon name="eye"></ion-icon>
+                  </ion-button>
+                  <ion-button shape="round" color="secondary" (click)="openModalEdit(ahorro)" *ngIf="!ahorro.compartido">
+                    <ion-icon name="create"></ion-icon>
+                  </ion-button>
+                  <ion-button shape="round" color="danger" (click)="alertDelete(ahorro)" *ngIf="!ahorro.compartido">
+                    <ion-icon name="trash" ></ion-icon>
+                  </ion-button>                
+                </ion-card-content>
               </ion-col>
             </ion-row>
           </ion-grid>          
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" *ngIf="!list?.length">
+        <ion-card class="ion-padding">
+          <ion-card-title class="ion-text-center">
+            No tienes ahorros
+          </ion-card-title>
         </ion-card>
       </ion-col>
     </ion-row>

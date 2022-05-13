@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "personal-banca-web": {
+      "hosting": {
+        "app": [
+          "personal-banca-web"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "personal-banca-web"
+  }
+}

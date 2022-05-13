@@ -5,7 +5,7 @@ import { Timestamp } from 'rxjs/internal/operators/timestamp';
 export class AhorroModel {
 
     @required({message: 'campo requerido'})
-    tipo: number = 1; // 1 ahorro | 2 deuda
+    tipo = 1; // 1 ahorro | 2 deuda
 
     @required({message: 'campo requerido'})
     nombre: string;
@@ -26,10 +26,12 @@ export class AhorroModel {
     tipo_ahorro: 1 | 2 | 3;
 
     @prop()
-    requiereFecha: boolean;
+    requiereFecha = false;
 
-    @required({message: 'campo requerido',  conditionalExpression: (model: AhorroModel) => !model.requiereFecha})
+    //conditionalExpression: (model) => model.requiereFecha === false
+    @required({message: 'campo requerido'})
     fechaMeta: string;
+
 
     @prop()
     id?:  number;

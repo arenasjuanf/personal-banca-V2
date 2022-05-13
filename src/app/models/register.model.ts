@@ -1,4 +1,4 @@
-import { compare, email, required } from '@rxweb/reactive-form-validators';
+import { compare, email, greaterThan, noneOf, required } from '@rxweb/reactive-form-validators';
 
 export class RegisterModel {
 
@@ -19,7 +19,7 @@ export class RegisterModel {
     @compare({fieldName: 'password', message: 'contraseñas no coinciden'})
     repassword: string;
 
-    @required({message: 'debe aceptar los teérminos y condiciones para continuar'})
-    aceptarTerminos = false;
+    @noneOf({message: 'debe aceptar los términos y condiciones para continuar', matchValues: [0, false]})
+    aceptarTerminos = 0;
 
 }

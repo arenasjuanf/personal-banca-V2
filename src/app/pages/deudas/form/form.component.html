@@ -1,0 +1,26 @@
+<app-header title="{{ deudaEdit ? 'Actualizar' : 'Crear' }} Deuda" [datos]="headerOptions"></app-header>
+<ion-content>
+  <ion-list lines="none" class="ion-no-margin" [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!deudaEdit">
+      <ion-label position="floating">Valor Deuda</ion-label>
+      <ion-input placeholder="¿Cuanto quieres ahorrar?" formControlName="objetivo" type="number"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label>Sin fecha meta</ion-label>
+      <ion-toggle formControlName="requiereFecha"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="!form.get('requiereFecha').value">
+      <ion-label position="floating">Fecha Meta</ion-label>
+      <ion-input formControlName="fechaMeta" (click)="openDatePicker()" readonly></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-text-center ion-no-border" collapse="fade">
+  <ion-button color="primary" [disabled]="form.invalid"  (click)="save()" > {{ deudaEdit ? 'Actualizar' : 'Guardar' }} </ion-button>
+  <ion-button color="danger" (click)="modalCtrl.dismiss()"> Cancelar </ion-button>
+</ion-footer>

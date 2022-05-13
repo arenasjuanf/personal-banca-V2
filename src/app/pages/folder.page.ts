@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
+import { Globals } from '../shared/globals';
 
 @Component({
   selector: 'app-folder',
@@ -11,18 +13,16 @@ export class PagesPage implements OnInit {
   public folder: string;
   public userData: {nombre: string; email: string};
 
-  public appPages = [
-    { title: 'Home', url: '/pages/home', icon: 'home' },
-    { title: 'Agregar', url: '/pages/agregar', icon: 'add' },
-    { title: 'Ahorros', url: '/pages/ahorros', icon: 'wallet' },
-    { title: 'Deudas', url: '/pages/deudas', icon: 'cash' },
-    { title: 'Noticias', url: '/pages/noticias', icon: 'newspaper' },
-
-  ];
+  public appPages: {
+    title: string;
+    url: string;
+    icon: string;
+  }[] = Globals.appPages;
 
   constructor(
     private activatedRoute: ActivatedRoute, 
-    private storage: StorageService
+    private storage: StorageService,
+    public auth: AuthService
   ) {
     this.getUserData();
   }
@@ -33,7 +33,6 @@ export class PagesPage implements OnInit {
 
   async getUserData(): Promise<void> {
     const { nombres, apellidos, email } = await this.storage.get('user');
-    console.log({ nombres, apellidos, email });
     this.userData = {
       nombre: `${nombres} ${apellidos}`,
       email

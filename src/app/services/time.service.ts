@@ -14,4 +14,8 @@ export class TimeService {
     return moment(date).format(format);
   }
 
+  format(date: Date | string){
+    return moment(date).format();
+  }
+
 }

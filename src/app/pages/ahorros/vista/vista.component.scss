@@ -20,13 +20,18 @@ ion-content{
         }
 
         .cell{
+            cursor: pointer;
             border: 1px solid #195d9f12;
             display: flex;
             justify-content: space-between;
+
+            &:hover{
+                background-color: #195d9f26;
+            }
         }
 
         .checked{
-            background-color: #eff4f8;
+            background-color: #195d9f26;
         }
     }
 }

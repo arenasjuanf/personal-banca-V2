@@ -1,9 +1,23 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>noticias</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Noticias"></app-header>
 
 <ion-content>
-
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size-xs="12" size-md="4" *ngFor="let new of news">
+                <ion-card class="pointer" (click)="ver(new)">
+                    <ion-card-header>
+                        <!-- 
+                            <ion-card-subtitle>{{ new.title }}</ion-card-subtitle>
+                        -->
+                        <ion-card-title>{{ new.title }}</ion-card-title>
+                    </ion-card-header>
+                    
+                    <ion-img [src]="new.urlToImage"  (error)="errorImage(img)" #img></ion-img>
+                        <ion-card-content>
+                        {{ new.description }}
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

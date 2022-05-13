@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AhorroModel } from '../models/ahorro.model';
@@ -6,6 +7,7 @@ import { HttpResponseModel } from '../models/httpResponse.model';
 import { Utils } from '../shared/utils';
 import { HttpService } from './http.service';
 import { StorageService } from './storage.service';
+import { TimeService } from './time.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AhorrosService {
 
   constructor(
     private http: HttpService,
-    private storage: StorageService
+    private storage: StorageService,
   ) { }
 
   async getAll(type: 1 | 2 = 1): Promise<Observable<HttpResponseModel>>{
@@ -25,10 +27,15 @@ export class AhorrosService {
     })));
   }
 
-  async save(data: AhorroModel){
+  async save(data: AhorroModel, update?: boolean){
     const { id: userId } = await this.storage.get('user');
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    return this.http.post('agregarAhorro', {...data, fk_id_usuario: userId, nombreAhorro: data.nombre, tipoAhorro: data.tipo_ahorro});
+    return this.http.post(!update ? 'agregarAhorro' : 'actualizarAhorro', {
+      ...data,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      fk_id_usuario: userId,
+      nombreAhorro: data.nombre,
+      tipoAhorro: data.tipo_ahorro
+    });
   }
 
   async getOne(id: number): Promise<Observable<any>>{
@@ -36,5 +43,24 @@ export class AhorrosService {
     return this.http.get(`datosAhorro/${id}`).pipe(map((result) => ({...result, montos })));
   }
 
+  selectIntervalo(data): Observable<any>{
+    return this.http.put(`actualizarMonto`, data);
+  }
+
+  addMonto(data: {idAhorro: number; monto: number}): Observable<HttpResponseModel>{
+    return this.http.post(`agregarMonto`, data);
+  }
+
+  delete(idAhorro: number, tipo: number): Observable<HttpResponseModel>{
+    return this.http.delete(`borrarAhorro`,{idAhorro,tipo});
+  }
+
+  shareSaving(userId: number, savingId: number, remove: boolean){
+    return this.http.post('compartirAhorro', {userId, savingId, remove});
+  }
+
+  getSharedSavingsUsers(ahorroId: number){
+    return this.http.get(`listarUsuariosCompartidos/${ahorroId}`);
+  }
 
 }

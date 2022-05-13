@@ -1,0 +1,53 @@
+<app-header [title]="datosAhorro?.nombre || ''" [datos]="headerOptions"></app-header>
+<ion-content class="content">
+  <ion-card>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col [size]="datosAhorro?.tipo_ahorro === 1 ? 9 : 12">
+            <ion-row>
+              <ion-col size="12" class="objetivo">
+                <ion-text >
+                  <h4>
+                    Objetivo: {{ datosAhorro?.objetivo | currency:"$":"symbol"}}
+                  </h4>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-text >
+                  <h4>Ahorrado: {{ (datosAhorro?.ahorrado) | currency:"$":"symbol" }}</h4>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="3" class="ion-text-end btn-add-container " >
+            <ion-button fill="solid" color="primary" size="small" (click)="showAddMonto()">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-list lines="full" >
+      <ion-item-sliding *ngFor="let monto of datosAhorro?.montos || []">
+        <ion-item>
+          <ion-label slot="start">{{ monto.valor | currency:"$":"symbol" }}</ion-label>     
+          <ion-label slot="end">{{ monto.created_at | date}}</ion-label>        
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option>
+            <ion-icon name="help-circle-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+      <ion-item *ngIf="!datosAhorro?.montos?.length" class="ion-text-center">
+        <ion-label> No hay montos </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
