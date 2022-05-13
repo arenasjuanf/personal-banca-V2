@@ -20,6 +20,10 @@ export class NewsService {
 
   headers: HttpHeaders = new HttpHeaders({
     'x-Api-key': this.KEY,
+    'Access-Control-Allow-Origin': 'https://personal-banca-web.web.app/',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'headers',
+    origin: 'localhost'
   });
 
   query<T>(query: string) {

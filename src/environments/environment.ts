@@ -7,7 +7,7 @@ export const environment = {
   urlServer: 'https://apparqueo.com/personalBancaBack2/public/api', //'http://127.0.0.1:8000/api',
   localDbName: '__personalBancaDB',
   newsKey: '641ea49d59d742dc96150ae569886319',
-  newsUrl: 'https://newsapi.org/v2',
+  newsUrl: `https://cors-anywhere.herokuapp.com/${'https://newsapi.org/v2'}`,
   firebaseConfig: {
     apiKey: 'AIzaSyBHms8w_KeojGgR2GMQzuoD30H4dg1sAeI',
     authDomain: 'personal-banca-web.firebaseapp.com',
