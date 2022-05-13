@@ -15,6 +15,7 @@ import { Drivers } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from './shared/pipes/date.pipe';
 import { LoadingService } from './services/loading.service';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 
 
 
@@ -23,6 +24,7 @@ import { LoadingService } from './services/loading.service';
   entryComponents: [],
   // eslint-disable-next-line max-len
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     BrowserModule,
     IonicModule.forRoot({
       swipeBackEnabled: false
@@ -40,7 +42,7 @@ import { LoadingService } from './services/loading.service';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     InAppBrowser,
-    LoadingService
+    LoadingService,
   ],
   bootstrap: [AppComponent],
 })
