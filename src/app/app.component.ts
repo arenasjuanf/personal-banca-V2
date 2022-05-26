@@ -21,8 +21,8 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      StatusBar.setBackgroundColor({color: '#195d9f'});
+    this.platform?.ready().then(() => {
+      StatusBar?.setBackgroundColor({color: '#195d9f'});
       // this.screenOrient.lock(this.screenOrient.ORIENTATIONS.PORTRAIT);
     })
   } 
