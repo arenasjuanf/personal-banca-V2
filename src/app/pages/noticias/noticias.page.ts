@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { LoadingService } from 'src/app/services/loading.service';
 import { NewsService } from 'src/app/services/news.service';
-
 @Component({
   selector: 'app-noticias',
   templateUrl: './noticias.page.html',
@@ -34,5 +33,9 @@ export class NoticiasPage implements OnInit {
 
   ver(noticia){
     this.iab.create(noticia.url);
+  }
+
+  errorImage(img) {
+    img.src = 'src/assets/images/dolar.jpg';
   }
 }

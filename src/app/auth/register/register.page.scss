@@ -91,3 +91,30 @@ ion-text{
         margin: auto 0 auto 0;
     }
 }
+.terms{
+    margin: 10px 5px 5px 5px;
+    display: flex;
+    justify-content: space-around;
+    ion-checkbox{
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    b{
+        color: var(--ion-color-primary)
+    }
+}
+
+.terms-content{
+    margin: 20px;
+    height: 100%;
+    overflow-y: auto;
+    border: 2px solid #4854e038;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: justify;
+
+    h5{
+        text-align: center;
+        font-weight: bold;
+    }
+}

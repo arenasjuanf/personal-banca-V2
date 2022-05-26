@@ -33,7 +33,6 @@ export class PagesPage implements OnInit {
 
   async getUserData(): Promise<void> {
     const { nombres, apellidos, email } = await this.storage.get('user');
-    console.log({ nombres, apellidos, email });
     this.userData = {
       nombre: `${nombres} ${apellidos}`,
       email

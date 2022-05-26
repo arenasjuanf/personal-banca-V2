@@ -14,6 +14,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { Drivers } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { DatePipe } from './shared/pipes/date.pipe';
+import { LoadingService } from './services/loading.service';
 
 
 
@@ -38,7 +39,8 @@ import { DatePipe } from './shared/pipes/date.pipe';
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    InAppBrowser
+    InAppBrowser,
+    LoadingService
   ],
   bootstrap: [AppComponent],
 })

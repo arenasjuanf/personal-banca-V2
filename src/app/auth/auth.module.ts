@@ -8,6 +8,7 @@ import { AuthPageRoutingModule } from './auth-routing.module';
 
 import { AuthPage } from './auth.page';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { LoadingService } from '../services/loading.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     FormsModule,
     RxReactiveFormsModule
   ],
-  declarations: [AuthPage]
+  declarations: [AuthPage],
+  providers:[
+    LoadingService
+  ]
 })
 export class AuthPageModule {}

@@ -22,7 +22,15 @@ const routes: Routes = [
     loadChildren: () => import('./ahorros/ahorros.module').then( m => m.AhorrosPageModule)
   },
   {
+    path: 'ahorros/:create',
+    loadChildren: () => import('./ahorros/ahorros.module').then( m => m.AhorrosPageModule)
+  },
+  {
     path: 'deudas',
+    loadChildren: () => import('./deudas/deudas.module').then( m => m.DeudasPageModule)
+  },
+  {
+    path: 'deudas/:create',
     loadChildren: () => import('./deudas/deudas.module').then( m => m.DeudasPageModule)
   },
   {

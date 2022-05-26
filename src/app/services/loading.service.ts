@@ -12,7 +12,7 @@ export class LoadingService {
   private flagLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-    public loadingController: LoadingController
+    private loadingController: LoadingController
   ) {
   }
 
@@ -21,7 +21,6 @@ export class LoadingService {
       message,
       cssClass: 'my-custom-class',
     });
-    console.log(this.currentLoading);
     this.currentLoading.present().then(() => {
       this.flagLoading.next(true);
     });

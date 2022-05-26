@@ -5,6 +5,7 @@ import { tap } from 'rxjs/operators';
 import { contacto } from 'src/app/pages/contactos/contactos.page';
 import { AhorrosService } from 'src/app/services/ahorros.service';
 import { ContactsService } from 'src/app/services/contacts.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -26,7 +27,8 @@ export class ContactsChooserComponent implements OnInit {
     private modal: ModalController,
     private popOver: PopoverController,
     private ahorrosSvc: AhorrosService,
-    private toast: ToastService
+    private toast: ToastService,
+    private loader: LoadingService
   ) {
   }
 
@@ -49,10 +51,12 @@ export class ContactsChooserComponent implements OnInit {
   }
 
   selectContact(contact: contacto){
-
     const remove = this.isSelected(contact);
+    this.loader.show(`${remove ? 'Removiendo' : 'Agregando'} Contacto`);
 
     this.ahorrosSvc.shareSaving(contact.idUser, this.idAhorro, remove).subscribe(({success, msj}) => {
+
+      this.loader.hide();
       if(success){
         this.traerUsuariosAhorro();
       }
@@ -68,7 +72,7 @@ export class ContactsChooserComponent implements OnInit {
   }
 
   traerUsuariosAhorro(){
-    this.ahorrosSvc.getSharedSavingsUsers(this.idAhorro).pipe(tap(console.log)).subscribe((users) => this.users = users);
+    this.ahorrosSvc.getSharedSavingsUsers(this.idAhorro).subscribe((users) => this.users = users);
   }
 
   isSelected(contact: contacto): boolean {

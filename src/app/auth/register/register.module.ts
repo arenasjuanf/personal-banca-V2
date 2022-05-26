@@ -8,6 +8,7 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { ToastService } from 'src/app/services/toast.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     FormsModule,
     RxReactiveFormsModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage],
+  providers:[
+    ToastService
+  ]
 })
 export class RegisterPageModule {}

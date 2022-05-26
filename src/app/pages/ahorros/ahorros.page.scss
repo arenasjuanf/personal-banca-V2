@@ -13,14 +13,19 @@
     }
     ion-card-subtitle{
         font-weight: 600;
-
+        margin-top: 2px;
+    }
+    ion-card-content{
+        padding: 10px 0 0 0;
     }
     ion-progress-bar{
         height: 7px;
         border-radius: 5px;
         --progress-background: var(--violet);
     }
-
+    ion-progress-bar{
+        margin-bottom: 5px;
+    }
     .meta-tipo{
         display: flex;
         justify-content: space-between;

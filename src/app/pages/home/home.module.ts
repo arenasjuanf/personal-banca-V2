@@ -7,14 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
+  providers:[
+    LoadingService
+  ]
 })
 export class HomePageModule {}

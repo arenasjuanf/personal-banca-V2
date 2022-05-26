@@ -58,6 +58,7 @@ export class VistaComponent implements OnInit {
     this.ahorroService.selectIntervalo(data).subscribe(({success}) => {
       if(success){
         this.getAhorro(this.datosAhorro.id);
+        this.update = true;
       }
     });
   }

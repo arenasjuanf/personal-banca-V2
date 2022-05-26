@@ -1,0 +1,36 @@
+ion-card{
+    h1{
+        font-size: 35px;
+    }
+    .footer{
+
+        background-color: transparent;
+        ion-text{
+            color: white;
+            width: 100%;
+            p{  
+                border-top: 1px solid #ffffffcf;
+                ion-icon{
+                    font-size: 20px;
+                }
+                font-weight: bold;
+                margin: 0;
+                padding: 5px;
+                width: 100%;
+                text-align: end;
+            }
+        }
+    }
+}
+
+.ahorros{
+    background-color: #72b5f287;
+}
+
+.deudas{
+    background-color: #2dd36f8f;
+}
+
+.contactos{
+    background-color: #195d9f91;
+}

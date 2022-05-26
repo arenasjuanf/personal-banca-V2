@@ -1,5 +1,5 @@
 <app-header title="Ahorros" [datos]="headerOptions"></app-header>
-<ion-segment mode="ios" id="segment" (ionChange)="filtrar($event)" value="0"  color="primary">
+<ion-segment #IonSegment mode="ios" id="segment" (ionChange)="filtrar()" value="0"  color="primary">
   <ion-segment-button value="0">
     <ion-label>Todos</ion-label>
   </ion-segment-button>
@@ -39,18 +39,21 @@
                       Falta: {{ (ahorro.objetivo - ahorro.ahorrado) | currency:"$":"symbol"  }}
                     </span>
                     <span *ngIf="ahorro?.fechaMeta">
-                      Fecha Meta: {{ ahorro.fechaMeta | date}}
+                      <small>
+                        Fecha Meta: {{ ahorro.fechaMeta | date}}
+                      </small> 
                     </span>
                   </ion-card-subtitle>
+                  
                 </ion-card-header>
                 <ion-card-content class="ion-text-end">
-                  <ion-button color="primary" (click)="openModalView(ahorro)">
+                  <ion-button shape="round" color="primary" (click)="openModalView(ahorro)">
                     <ion-icon name="eye"></ion-icon>
                   </ion-button>
-                  <ion-button color="secondary" (click)="openModalEdit(ahorro)">
+                  <ion-button shape="round" color="secondary" (click)="openModalEdit(ahorro)" *ngIf="!ahorro.compartido">
                     <ion-icon name="create"></ion-icon>
                   </ion-button>
-                  <ion-button color="danger" (click)="alertDelete(ahorro)">
+                  <ion-button shape="round" color="danger" (click)="alertDelete(ahorro)" *ngIf="!ahorro.compartido">
                     <ion-icon name="trash" ></ion-icon>
                   </ion-button>                
                 </ion-card-content>
